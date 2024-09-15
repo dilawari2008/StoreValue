@@ -1,4 +1,4 @@
-const { ethers, run, network } = require("hardhat");
+import { ethers, run, network } from "hardhat";
 
 const main = async () => {
   // 1.deploy
@@ -12,7 +12,7 @@ const main = async () => {
   console.log("network.config:", network.config);
   if (network.config.chainId === 11155111 && process.env.ETHERSCAN_API_KEY) {
     console.log("Waiting for block confs...");
-    await simpleStorage.deploymentTransaction().wait(6);
+    await simpleStorage?.deploymentTransaction()?.wait(6);
     await verify(contractAddress, []);
     console.log(`Contract: ${contractAddress} verified`);
   }
@@ -27,7 +27,7 @@ const main = async () => {
   console.log(`Current value: ${currentValue}`);
 };
 
-const verify = async (contractAddress, args) => {
+const verify = async (contractAddress: string, args: any[]) => {
   console.log("Verifying contract...");
   try {
     await run("verify:verify", {
@@ -35,7 +35,7 @@ const verify = async (contractAddress, args) => {
       address: contractAddress,
       constructorArguments: args,
     });
-  } catch (e) {
+  } catch (e: any) {
     if (e.message.toLowerCase().includes("already verified")) {
       console.log("Already verified!");
     } else {

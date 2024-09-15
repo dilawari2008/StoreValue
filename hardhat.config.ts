@@ -1,10 +1,13 @@
 // stuff imported here become tasks , they can be used as yarn hardhat <task name>
-require("@nomicfoundation/hardhat-toolbox");
-require("dotenv").config();
-require("@nomicfoundation/hardhat-verify"); // verify task
-require("./tasks/block-number"); // block-number task
-require("hardhat-gas-reporter");
-require("solidity-coverage"); // coverage task
+import "@nomicfoundation/hardhat-ethers"
+import "@typechain/hardhat" // typechain task
+
+import "@nomicfoundation/hardhat-toolbox";
+import "dotenv/config";
+import "@nomicfoundation/hardhat-verify"; // verify task
+import "./tasks/block-number"; // block-number task
+import "hardhat-gas-reporter";
+import "solidity-coverage"; // coverage task
 
 const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL || "https://eth-sepolia";
 const PRIVATE_KEY = process.env.PRIVATE_KEY || "0xkey";
@@ -41,7 +44,7 @@ module.exports = {
     currency: "USD",
     // outputFile: "gas-report.txt", -> enable gives in a file disable gives in terminal
     noColors: false,
-    coinmarketcap: COINMARKETCAP_API_KEY,
+    // coinmarketcap: COINMARKETCAP_API_KEY,
     // token: "MATIC", "BNB", "ETH" -> default
   },
 };

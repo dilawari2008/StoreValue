@@ -1,10 +1,12 @@
-const { ethers } = require("hardhat");
-const { expect, assert } = require("chai");
+import { ethers } from "hardhat";
+import { expect, assert } from "chai";
+import { SimpleStorage__factory, SimpleStorage } from "../typechain-types";
 
 describe("SimpleStorage", function () {
-  let simpleStorageFactory, simpleStorage;
+  let simpleStorageFactory: SimpleStorage__factory,
+    simpleStorage: SimpleStorage;
   beforeEach(async function () {
-    simpleStorageFactory = await ethers.getContractFactory("SimpleStorage");
+    simpleStorageFactory = (await ethers.getContractFactory("SimpleStorage")) as unknown as SimpleStorage__factory;
     simpleStorage = await simpleStorageFactory.deploy();
   });
 
@@ -38,8 +40,7 @@ describe("SimpleStorage", function () {
     // const person = await simpleStorage.people(0)
     // const favNumber = person.favoriteNumber
     // const pName = person.name
-
     assert.equal(name, expectedPersonName);
-    assert.equal(favoriteNumber, expectedFavoriteNumber);
+    assert.equal(favoriteNumber.toString(), expectedFavoriteNumber.toString());
   });
 });
